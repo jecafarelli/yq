@@ -19,7 +19,7 @@ builds:
     ldflags:
       - "-s -w -X main.Version={{.Version}} -X main.commit={{.Commit}}"
 release:
-  disable: true
+  disable: false
 
 snapshot:
   name_template: "git-{{.ShortCommit}}"

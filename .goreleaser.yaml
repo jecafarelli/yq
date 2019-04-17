@@ -1,0 +1,34 @@
+# Configuration for https://goreleaser.com/
+project_name: yq
+env:
+  - GO111MODULE=on
+before:
+  hooks:
+    - go mod download
+builds:
+  - binary: yq
+    main: ./
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - "-s -w -X main.version={{.Version}} -X main.commit={{.Commit}}"
+release:
+  disable: true
+
+snapshot:
+  name_template: "git-{{.ShortCommit}}"
+
+archive:
+  format: binary
+
+artifactories:
+  - name: production
+    mode: binary
+    target: '{{ .Env.ARTIFACTORY_REPO }}/{{ .Os }}/{{ .ProjectName }}/{{ .Version }}'
+    username: '{{ .Env.ARTIFACTORY_USER }}'

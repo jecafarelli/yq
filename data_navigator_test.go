@@ -5,7 +5,7 @@ import (
 	"sort"
 	"testing"
 
-	yaml "gopkg.in/mikefarah/yaml.v2"
+	yaml "github.com/jecafarelli/yaml"
 )
 
 func TestReadMap_simple(t *testing.T) {
